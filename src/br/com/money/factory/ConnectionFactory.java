@@ -16,19 +16,16 @@ public class ConnectionFactory {
 	
 	@Produces
 	@ApplicationScoped
-	public EntityManagerFactory getFactory(){
-		System.out.println("Criou Factory");
-		return Persistence.createEntityManagerFactory("teste-jpa");
+	public EntityManagerFactory getFactory(){		
+		return Persistence.createEntityManagerFactory("moneyDs");
 	}	
 	
 	@Produces @RequestScoped
-	public EntityManager criarEntityManager(){
-		System.out.println("Abrindo conexao..");
+	public EntityManager criarEntityManager(){		
 		return factory.createEntityManager();
 	}
 		
-	public void fechaEntityManager(@Disposes EntityManager em){
-		System.out.println("Fechou conexao");
+	public void fechaEntityManager(@Disposes EntityManager em){		
 		em.close();
 	}
 

@@ -8,10 +8,10 @@ import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import br.com.money.annotations.Transacional;
+import br.com.money.annotations.Transactional;
 
 @Interceptor
-@Transacional
+@Transactional
 @Priority(Interceptor.Priority.APPLICATION)
 public class TransactionsManager {
 

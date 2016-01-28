@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource auth="Container" 
+		driverClassName="org.postgresql.Driver"
+		removeAbandonedOnBorrow="true"
+		removeAbandonedTimeout="1"
+		logAbandoned="true"
+		maxTotal="10"
+		maxIdle="3"		
+		name="moneyDS"
+		type="javax.sql.DataSource"
+		password="www."
+		url="jdbc:postgresql://localhost:5432/money"
+		username="postgres"
+	/>
+</Context>

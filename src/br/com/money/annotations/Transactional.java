@@ -10,4 +10,4 @@ import javax.interceptor.InterceptorBinding;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @InterceptorBinding
-public @interface Transacional {}
+public @interface Transactional {}
