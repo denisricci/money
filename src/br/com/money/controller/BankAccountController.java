@@ -39,5 +39,11 @@ public class BankAccountController implements Serializable{
 		List<Bank> banks = dao.findAll(Bank.class);
 		result.use(Results.json()).from(banks).include("id").serialize();		
 	}
+	
+	@Transactional
+	public void remove(BankAccount bankAccount){
+		dao.remove(bankAccount.getId(), BankAccount.class);
+		result.redirectTo("/BankAccount.html");
+	}
 
 }

@@ -5,6 +5,7 @@
 
 <script src="resources/js/jquery/jquery-2.2.0.min.js"></script>
 <script src="resources/js/jquery/jquery.validate.min.js"></script>
+<script src="resources/js/jquery/jquery.mask.min.js"></script>
 
 <title>Bank Account</title>
 </head>
@@ -14,22 +15,22 @@
 		<fieldset>
 			<legend>New Bank Account</legend>
 			<table>
-			
+
 				<tr>
 					<td><label for="bankAccount.description">Description</label></td>
 					<td><input name="bankAccount.description"
-						id="bankAccount.description" type="text" required/></td>
+						id="bankAccount.description" type="text" required /></td>
 				</tr>
 				<tr>
 					<td><label for="bankAccount.openingBalance">Opening
 							Balance</label></td>
-					<td><input name="bankAccount.openingBalance"
-						id="bankAccount.openingBalance" type="text" required/></td>
+					<td><input name="bankAccount.openingBalance" class="money"
+						id="bankAccount.openingBalance" type="text" required /></td>
 				</tr>
 				<tr>
 					<td><label for="banks">Bank</label></td>
-					<td><select id="banks" name="bankAccount.bank.id">
-						<option value="0">select one ...</option>
+					<td><select id="banks" name="bankAccount.bank.id" required>
+							<option value="">select one ...</option>
 					</select></td>
 				</tr>
 			</table>
@@ -48,44 +49,70 @@
 	</form>
 
 	<script>
-	
+		$('.money').mask('000.000.000.000.000,00', {
+			reverse : true
+		});
 		$("#frmBankAccount").validate();
-		
-		$(document).ready(
-				function() {
-					$.ajax({
-						type : 'GET',
-						url : 'bankAccount/list',
-						data : {
-							get_param : 'value'
-						},
-						success : function(data) {
-							var trHTML = '';
-							$.each(data.list, function(i, item) {
-								trHTML += '<tr><td>' + item.description
-										+ '</td><td>' + item.openingBalance
-										+ '</td><td>' + item.bank.name
-										+ '</td></tr>';
-							});
-							$('#records_table').append(trHTML);
-						}
-					});
-					
-					$.ajax({
-						type : 'GET',
-						url : 'bankAccount/bankList',
-						data : {
-							get_param : 'value'
-						},
-						success : function(data) {							
-							$.each(data.list, function(i, item) {
-								$('#banks').append('<option value=' + item.id + '>' + item.name + '</option>');
-							});
+		$(document)
+				.ready(
+						function() {
+							$
+									.ajax({
+										type : 'GET',
+										url : 'bankAccount/list',
+										data : {
+											get_param : 'value'
+										},
+										success : function(data) {
+											var trHTML = '';
+											$
+													.each(
+															data.list,
+															function(i, item) {
+																trHTML += '<tr><td>'
+																		+ item.description
+																		+ '</td><td>'
+																		+ item.openingBalance
+																		+ '</td><td>'
+																		+ item.bank.name
+																		+ '</td><td>'
+																		+ '<input type=\"button\" value=\"remove\" onclick=\"removeAccount('
+																		+ item.id
+																		+ ')\">'
+																		+ '</td></tr>';
+															});
+											$('#records_table').append(trHTML);
+										}
+									});
 
-						}
-					});	
-				}							
-		);
+							$.ajax({
+								type : 'GET',
+								url : 'bankAccount/bankList',
+								data : {
+									get_param : 'value'
+								},
+								success : function(data) {
+									$.each(data.list, function(i, item) {
+										$('#banks').append(
+												'<option value=' + item.id + '>'
+														+ item.name
+														+ '</option>');
+									});
+
+								}
+							});
+						});
+
+		function removeAccount(accountId) {
+			var form = document.createElement("form");
+			form.method = "POST";
+			form.action = "bankAccount/remove";
+			var element1 = document.createElement("input");
+			element1.value = accountId;
+			element1.name = "bankAccount.id";
+			form.appendChild(element1);
+			form.submit();
+		}
 	</script>
 </body>
 </html>
