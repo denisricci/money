@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head ng-app="money">
 <meta charset="ISO-8859-1">
 
 <script src="resources/js/jquery/jquery-2.2.0.min.js"></script>
 <script src="resources/js/jquery/jquery.validate.min.js"></script>
 <script src="resources/js/jquery/jquery.mask.min.js"></script>
-
+<script src="resources/js/angular/angular.min.js"></script>
+<script src="resources/js/angular/app.js"></script>
 <title>Bank Account</title>
 </head>
 <body>
@@ -22,10 +23,10 @@
 						id="bankAccount.description" type="text" required /></td>
 				</tr>
 				<tr>
-					<td><label for="bankAccount.openingBalance">Opening
+					<td><label for="bankAccount.balance">Opening
 							Balance</label></td>
-					<td><input name="bankAccount.openingBalance" class="money"
-						id="bankAccount.openingBalance" type="text" required /></td>
+					<td><input name="bankAccount.balance" class="money"
+						id="bankAccount.balance" type="text" required /></td>
 				</tr>
 				<tr>
 					<td><label for="banks">Bank</label></td>
@@ -41,7 +42,7 @@
 			<table id="records_table">
 				<tr>
 					<td>Description</td>
-					<td>Opening Balance</td>
+					<td>Balance</td>
 					<td>Bank</td>
 				</tr>
 			</table>
@@ -72,7 +73,7 @@
 																trHTML += '<tr><td>'
 																		+ item.description
 																		+ '</td><td>'
-																		+ item.openingBalance
+																		+ item.balance
 																		+ '</td><td>'
 																		+ item.bank.name
 																		+ '</td><td>'

@@ -45,5 +45,4 @@ public class BankAccountController implements Serializable{
 		dao.remove(bankAccount.getId(), BankAccount.class);
 		result.redirectTo("/BankAccount.html");
 	}
-
 }
