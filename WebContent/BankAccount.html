@@ -1,42 +1,58 @@
 <!DOCTYPE html>
-<html>
-<head ng-app="money">
+<html ng-app="money">
+<head>
 <meta charset="ISO-8859-1">
 
+<link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+
 <script src="resources/js/jquery/jquery-2.2.0.min.js"></script>
-<script src="resources/js/jquery/jquery.validate.min.js"></script>
 <script src="resources/js/jquery/jquery.mask.min.js"></script>
 <script src="resources/js/angular/angular.min.js"></script>
 <script src="resources/js/angular/app.js"></script>
+
 <title>Bank Account</title>
 </head>
 <body>
-
-	<form action="bankAccount/save" id="frmBankAccount">
+	<form name="frmBankAccount" action="bankAccount/save"
+		ng-controller="MoneyController as moneyCtrl" novalidate>
 		<fieldset>
 			<legend>New Bank Account</legend>
 			<table>
-
 				<tr>
-					<td><label for="bankAccount.description">Description</label></td>
+					<td><label for="bankAccount.description">Description*</label></td>
 					<td><input name="bankAccount.description"
-						id="bankAccount.description" type="text" required /></td>
+						ng-model="bankAccount.description" id="bankAccount.description"
+						type="text" required /></td>
 				</tr>
 				<tr>
-					<td><label for="bankAccount.balance">Opening
-							Balance</label></td>
-					<td><input name="bankAccount.balance" class="money"
+					<td><label for="bankAccount.balance">Opening Balance*</label></td>
+					<td><input name="bankAccount.balance"
+						ng-model="bankAccount.balance" class="money"
 						id="bankAccount.balance" type="text" required /></td>
 				</tr>
 				<tr>
-					<td><label for="banks">Bank</label></td>
-					<td><select id="banks" name="bankAccount.bank.id" required>
-							<option value="">select one ...</option>
+					<td><label for="banks">Bank*</label></td>
+					<td><select id="banks" name="bankAccount.bank.id"
+						ng-model="bankAccount.bank"
+						ng-options="bank as bank.name for bank in moneyCtrl.banks.list track by bank.id"
+						required>
+							<option value="">select one ..</option>
 					</select></td>
 				</tr>
+				<tr>
+					<td>
+						<button type="submit" ng-disabled="frmBankAccount.$invalid">save</button>
+					</td>
+					<td>
+						<div ng-hide="frmBankAccount.$valid">
+							<font color="red">* required fields</font>
+						</div>
+					</td>
+				</tr>
 			</table>
-			<input type="submit" value="save" />
+
 		</fieldset>
+		<div>frmBankAccount is {{frmBankAccount.$invalid}}</div>
 		<fieldset>
 			<legend>Existing bank accounts</legend>
 			<table id="records_table">
@@ -44,6 +60,13 @@
 					<td>Description</td>
 					<td>Balance</td>
 					<td>Bank</td>
+				</tr>
+				<tr ng-repeat="account in moneyCtrl.accounts.list">
+					<td>{{account.description}}</td>
+					<td>{{account.balance}}</td>
+					<td>{{account.bank.name}}</td>
+					<td><input type="button" ng-click="moneyCtrl.remove(account)"
+						value="remove"></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -53,67 +76,6 @@
 		$('.money').mask('000.000.000.000.000,00', {
 			reverse : true
 		});
-		$("#frmBankAccount").validate();
-		$(document)
-				.ready(
-						function() {
-							$
-									.ajax({
-										type : 'GET',
-										url : 'bankAccount/list',
-										data : {
-											get_param : 'value'
-										},
-										success : function(data) {
-											var trHTML = '';
-											$
-													.each(
-															data.list,
-															function(i, item) {
-																trHTML += '<tr><td>'
-																		+ item.description
-																		+ '</td><td>'
-																		+ item.balance
-																		+ '</td><td>'
-																		+ item.bank.name
-																		+ '</td><td>'
-																		+ '<input type=\"button\" value=\"remove\" onclick=\"removeAccount('
-																		+ item.id
-																		+ ')\">'
-																		+ '</td></tr>';
-															});
-											$('#records_table').append(trHTML);
-										}
-									});
-
-							$.ajax({
-								type : 'GET',
-								url : 'bankAccount/bankList',
-								data : {
-									get_param : 'value'
-								},
-								success : function(data) {
-									$.each(data.list, function(i, item) {
-										$('#banks').append(
-												'<option value=' + item.id + '>'
-														+ item.name
-														+ '</option>');
-									});
-
-								}
-							});
-						});
-
-		function removeAccount(accountId) {
-			var form = document.createElement("form");
-			form.method = "POST";
-			form.action = "bankAccount/remove";
-			var element1 = document.createElement("input");
-			element1.value = accountId;
-			element1.name = "bankAccount.id";
-			form.appendChild(element1);
-			form.submit();
-		}
 	</script>
 </body>
 </html>

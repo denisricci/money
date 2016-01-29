@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
@@ -41,8 +42,9 @@ public class BankAccountController implements Serializable{
 	}
 	
 	@Transactional
+	@Consumes("application/json")
 	public void remove(BankAccount bankAccount){
 		dao.remove(bankAccount.getId(), BankAccount.class);
-		result.redirectTo("/BankAccount.html");
+		result.use(Results.http()).setStatusCode(200);
 	}
 }
