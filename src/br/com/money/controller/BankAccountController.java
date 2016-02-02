@@ -27,8 +27,7 @@ public class BankAccountController implements Serializable{
 	
 	@Transactional
 	public void save(BankAccount bankAccount){
-		dao.save(bankAccount);
-		result.redirectTo("/BankAccount.html");
+		dao.save(bankAccount);		
 	}
 	
 	public void list(){
@@ -46,5 +45,9 @@ public class BankAccountController implements Serializable{
 	public void remove(BankAccount bankAccount){
 		dao.remove(bankAccount.getId(), BankAccount.class);
 		result.use(Results.http()).setStatusCode(200);
+	}
+	
+	public void forward(){
+		result.forwardTo("../WEB-INF/html/bankAccount.html");
 	}
 }

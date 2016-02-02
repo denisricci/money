@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="module-cash-flow">
+<head>
+<meta charset="ISO-8859-1">
+<title>Cash Flow</title>
+<script src="../resources/js/jquery/jquery-2.2.0.min.js"></script>
+<script src="../resources/js/jquery/jquery.mask.min.js"></script>
+<script src="../resources/js/angular/angular.min.js"></script>
+<script src="../resources/js/angular/cashFlow.js"></script>
+</head>
+<body>
+	<form ng-controller="CashFlowController as cashFlowCtrl">
+
+		<fieldset>
+			<legend>Movement</legend>
+			<table>
+				<tr>
+					<td><label for="value">Value</label></td>
+					<td><input name="movement.value" id="value" type="text" class="money" ng-model="cashFlowCtrl.movement.value"/></td>
+				</tr>
+				<tr>
+					<td><label for="category">Category</label></td>
+					<td><select id="category" name="movement.category.id"
+						ng-model="cashFlowCtrl.movement.category"
+						ng-options="category as category.description for category in cashFlowCtrl.categories.list track by category.id"
+						required>
+							<option value="">select one ..</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><label for="value">Description</label></td>
+					<td><input name="movement.description" id="description" ng-model="cashFlowCtrl.movement.description"
+						type="text" /></td>
+				</tr>
+				<tr>
+					<td><label for="date">Date</label></td>
+					<td><input name="movement.date" id="date" class="date" ng-model="cashFlowCtrl.movement.date"
+						type="text" /></td>
+				</tr>
+				<tr>
+					<td><label for="value">Operation</label></td>
+					<td><select>
+							<option value="1">Debit</option>
+							<option value="2">Credit</option>
+					</select></td>
+				</tr>
+				<tr>					
+					<td><input type="button" value="add" ng-click="cashFlowCtrl.add()"/></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend>Cash Flow</legend>
+		</fieldset>
+	</form>
+
+	<script>
+		$('.money').mask('000.000.000.000.000,00', {
+			reverse : true
+		});
+		 
+		$('.date').mask('00/00/0000');
+	</script>
+</body>
+</html>

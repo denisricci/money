@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html ng-app="money">
+<html ng-app="module-bank-account">
 <head>
 <meta charset="ISO-8859-1">
 
-<link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/style.css"/>
 
-<script src="resources/js/jquery/jquery-2.2.0.min.js"></script>
-<script src="resources/js/jquery/jquery.mask.min.js"></script>
-<script src="resources/js/angular/angular.min.js"></script>
-<script src="resources/js/angular/app.js"></script>
+<script src="../resources/js/jquery/jquery-2.2.0.min.js"></script>
+<script src="../resources/js/jquery/jquery.mask.min.js"></script>
+<script src="../resources/js/angular/angular.min.js"></script>
+<script src="../resources/js/angular/bankAccount.js"></script>
 
 <title>Bank Account</title>
 </head>
 <body>
-	<form name="frmBankAccount" action="bankAccount/save"
+	<form name="frmBankAccount" action="save" method="POST"
 		ng-controller="MoneyController as moneyCtrl" novalidate>
 		<fieldset>
 			<legend>New Bank Account</legend>
@@ -51,8 +51,7 @@
 				</tr>
 			</table>
 
-		</fieldset>
-		<div>frmBankAccount is {{frmBankAccount.$invalid}}</div>
+		</fieldset>		
 		<fieldset>
 			<legend>Existing bank accounts</legend>
 			<table id="records_table">
@@ -70,6 +69,8 @@
 				</tr>
 			</table>
 		</fieldset>
+		
+		<p>&nbsp<a href="../index.html">go to home</a></p>
 	</form>
 
 	<script>
