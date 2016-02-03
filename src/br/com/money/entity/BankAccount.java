@@ -1,5 +1,7 @@
 package br.com.money.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,9 +15,10 @@ public class BankAccount extends EntityBase<Integer>{
 	
 	@Id
 	@GeneratedValue	
-	private Integer id;
-	private String description;	
-	private double balance;
+	private Integer id;	
+	private BigDecimal balance;
+	private int number;
+	private int agency;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Bank bank;
@@ -25,24 +28,30 @@ public class BankAccount extends EntityBase<Integer>{
 	}	
 	public void setBank(Bank bank) {
 		this.bank = bank;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public double getBalance() {
-		return balance;
-	}
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-	
+	}	
+
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public int getAgency() {
+		return agency;
+	}
+	public void setAgency(int agency) {
+		this.agency = agency;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public BigDecimal getBalance() {
+		return balance;
+	}
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 }

@@ -26,8 +26,10 @@ public class BankAccountController implements Serializable{
 	private GenericDAO dao;			
 	
 	@Transactional
+	@Consumes("application/json")
 	public void save(BankAccount bankAccount){
-		dao.save(bankAccount);		
+		dao.save(bankAccount);
+		result.use(Results.http()).setStatusCode(200);
 	}
 	
 	public void list(){

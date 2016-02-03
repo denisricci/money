@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head ng-module="module-choose-account">
+<meta charset="ISO-8859-1">
+<title>Choose one Account</title>
+</head>
+<body>
+	
+	<fieldset ng-controller="ChooseAccountController as chooseCtrl">
+		<legend>Accounts</legend>
+		 <div ng-repeat="account in chooseCtrl.accounts.list">
+		 	<a href="#">{{account.bank.name}}</a>		 	
+		 </div>
+	</fieldset>
+</body>
+</html>

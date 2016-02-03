@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import br.com.money.enums.Operation;
+
 @Entity
 public class Movement extends EntityBase<Integer>{
 		
@@ -17,6 +19,8 @@ public class Movement extends EntityBase<Integer>{
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
+	private Operation operation;
 	
 	private String description;
 		
@@ -75,5 +79,13 @@ public class Movement extends EntityBase<Integer>{
 
 	public void setCurrentBalance(BigDecimal currentBalance) {
 		this.currentBalance = currentBalance;
+	}
+
+	public Operation getOperation() {
+		return operation;
+	}
+
+	public void setOperation(Operation operation) {
+		this.operation = operation;
 	}
 }

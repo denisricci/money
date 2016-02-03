@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
+import br.com.money.annotations.Transactional;
 import br.com.money.dao.GenericDAO;
 import br.com.money.entity.Category;
 import br.com.money.entity.Movement;
@@ -30,9 +31,10 @@ public class CashFlowController {
 		result.use(Results.json()).from(categories).serialize();
 	}
 	
+	@Transactional
 	@Consumes("application/json")
 	public void add(Movement movement){
-		System.out.println(movement.getDescription());
+		dao.save(movement);
+		result.use(Results.http()).setStatusCode(200);
 	}
-	
 }

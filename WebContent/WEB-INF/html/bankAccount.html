@@ -10,30 +10,37 @@
 <script src="../resources/js/angular/angular.min.js"></script>
 <script src="../resources/js/angular/bankAccount.js"></script>
 
+
 <title>Bank Account</title>
 </head>
 <body>
-	<form name="frmBankAccount" action="save" method="POST"
+	<form name="frmBankAccount" method="POST"
 		ng-controller="MoneyController as moneyCtrl" novalidate>
 		<fieldset>
 			<legend>New Bank Account</legend>
 			<table>
 				<tr>
-					<td><label for="bankAccount.description">Description*</label></td>
-					<td><input name="bankAccount.description"
-						ng-model="bankAccount.description" id="bankAccount.description"
+					<td><label for="bankAccount.agency">Agency*</label></td>
+					<td><input name="bankAccount.agency" class="agency"
+						ng-model="moneyCtrl.bankAccount.agency" id="bankAccount.agency"
+						type="text" required /></td>
+				</tr>
+				<tr>
+					<td><label for="bankAccount.number">Number*</label></td>
+					<td><input name="bankAccount.number" class="accountNumber"
+						ng-model="moneyCtrl.bankAccount.number" id="bankAccount.number"
 						type="text" required /></td>
 				</tr>
 				<tr>
 					<td><label for="bankAccount.balance">Opening Balance*</label></td>
 					<td><input name="bankAccount.balance"
-						ng-model="bankAccount.balance" class="money"
+						ng-model="moneyCtrl.bankAccount.balance" class="money"
 						id="bankAccount.balance" type="text" required /></td>
 				</tr>
 				<tr>
 					<td><label for="banks">Bank*</label></td>
 					<td><select id="banks" name="bankAccount.bank.id"
-						ng-model="bankAccount.bank"
+						ng-model="moneyCtrl.bankAccount.bank"
 						ng-options="bank as bank.name for bank in moneyCtrl.banks.list track by bank.id"
 						required>
 							<option value="">select one ..</option>
@@ -41,7 +48,7 @@
 				</tr>
 				<tr>
 					<td>
-						<button type="submit" ng-disabled="frmBankAccount.$invalid">save</button>
+						<input type="button" ng-disabled="frmBankAccount.$invalid" ng-click="moneyCtrl.save()" value="save"/>
 					</td>
 					<td>
 						<div ng-hide="frmBankAccount.$valid">
@@ -56,12 +63,14 @@
 			<legend>Existing bank accounts</legend>
 			<table id="records_table">
 				<tr>
-					<td>Description</td>
+					<td>Agency</td>
+					<td>Number</td>
 					<td>Balance</td>
 					<td>Bank</td>
 				</tr>
 				<tr ng-repeat="account in moneyCtrl.accounts.list">
-					<td>{{account.description}}</td>
+					<td>{{account.agency}}</td>
+					<td>{{account.number}}</td>
 					<td>{{account.balance}}</td>
 					<td>{{account.bank.name}}</td>
 					<td><input type="button" ng-click="moneyCtrl.remove(account)"
@@ -77,6 +86,10 @@
 		$('.money').mask('000.000.000.000.000,00', {
 			reverse : true
 		});
+		
+		 $('.agency').mask('0000');
+		 
+		 $('.accountNumber').mask('000000000');
 	</script>
 </body>
 </html>
