@@ -7,5 +7,9 @@
 			controller.accounts = data;
 		});
 		
+		controller.choose = function(accountId){
+			document.getElementById('accountId').value = accountId;
+			document.getElementById('frmChoose').submit();
+		}
 	} ]);
 })();

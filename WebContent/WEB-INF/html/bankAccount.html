@@ -41,7 +41,7 @@
 					<td><label for="banks">Bank*</label></td>
 					<td><select id="banks" name="bankAccount.bank.id"
 						ng-model="moneyCtrl.bankAccount.bank"
-						ng-options="bank as bank.name for bank in moneyCtrl.banks.list track by bank.id"
+						ng-options="bank as bank.name for bank in moneyCtrl.banks track by bank.id"
 						required>
 							<option value="">select one ..</option>
 					</select></td>
@@ -68,7 +68,7 @@
 					<td>Balance</td>
 					<td>Bank</td>
 				</tr>
-				<tr ng-repeat="account in moneyCtrl.accounts.list">
+				<tr ng-repeat="account in moneyCtrl.accounts">
 					<td>{{account.agency}}</td>
 					<td>{{account.number}}</td>
 					<td>{{account.balance}}</td>

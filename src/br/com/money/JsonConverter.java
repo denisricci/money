@@ -18,7 +18,7 @@ import br.com.caelum.vraptor.serialization.Deserializer;
 import br.com.caelum.vraptor.serialization.Deserializes;
 
 @Deserializes("application/json")
-public class JsonConverter implements Deserializer {
+public class JsonConverter implements Deserializer{
 
 	private static Gson gson;
 
@@ -35,9 +35,10 @@ public class JsonConverter implements Deserializer {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		for (int i = 0; i < method.getMethod().getParameterTypes().length; i++) {
 			objects[i] = gson.fromJson(reader, method.getMethod().getParameterTypes()[i]);
-		}
+		}			
 		return objects;
 	}
+
 	
 	class BigDecimalAdapter implements JsonDeserializer<BigDecimal>{
 
@@ -47,9 +48,11 @@ public class JsonConverter implements Deserializer {
 			if(value.contains(",")){
 				value = value.replaceAll("\\.", "");
 				value = value.replaceAll(",", ".");
-			}
+			}			
 			return new BigDecimal(value);
 		}
+		
+		
 		
 	}
 }

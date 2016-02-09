@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html>
-<head ng-module="module-choose-account">
+<html ng-app="module-choose-account">
+<head>
 <meta charset="ISO-8859-1">
+<script src="../resources/js/jquery/jquery-2.2.0.min.js"></script>
+<script src="../resources/js/angular/angular.min.js"></script>
+<script src="../resources/js/angular/chooseAccount.js"></script>
 <title>Choose one Account</title>
 </head>
-<body>
-	
-	<fieldset ng-controller="ChooseAccountController as chooseCtrl">
-		<legend>Accounts</legend>
-		 <div ng-repeat="account in chooseCtrl.accounts.list">
-		 	<a href="#">{{account.bank.name}}</a>		 	
-		 </div>
+<body>	
+<form method="get" ng-controller="ChooseAccountController as chooseCtrl" action="forward#" id="frmChoose">
+	<input type="hidden" id="accountId" name="accountId"/>
+	<fieldset>
+		<legend>Choose one account</legend>
+		 <table>
+		 <tr>
+		 	<td>Agency</td>
+		 	<td>Number</td>
+		 	<td>Bank</td>
+		 </tr>
+		 	<tr ng-repeat="account in chooseCtrl.accounts.list">
+		 		<td>{{account.agency}}</td>
+		 		<td>{{account.number}}</td>
+		 		<td>{{account.bank.name}}</td>
+		 		<td><a href="#" ng-click="chooseCtrl.choose(account.id)">choose</a></td>		
+		 	</tr> 	
+		 </table>
 	</fieldset>
+	</form>
 </body>
 </html>

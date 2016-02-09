@@ -2,8 +2,11 @@ package br.com.money.dao;
 
 import java.util.List;
 
+import javax.annotation.Priority;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
+import javax.interceptor.Interceptor;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
@@ -12,6 +15,7 @@ import javax.persistence.TypedQuery;
 import br.com.money.entity.EntityBase;
 
 @RequestScoped
+@Alternative @Priority(Interceptor.Priority.APPLICATION + 1) 
 public class GenericDAO {
 
 	@Inject
@@ -48,13 +52,12 @@ public class GenericDAO {
 	public <E> E findById(Object id, Class<E> classe) {
 		return getEntityManager().find(classe, id);
 	}
-
 		
 	public <E> List<E> findAll(Class<E> classe) {
 		TypedQuery<E> query = getEntityManager().createQuery("from " + classe.getSimpleName() + " where excluido = 0", classe);		
 		return query.getResultList();
 	}		
-
+	
 	public EntityManager getEntityManager() {
 		return this.entityManager;
 	}

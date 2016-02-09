@@ -7,19 +7,19 @@
 		controller.bankAccount={};
 
 		$http.get('bankList').success(function(data) {
-			controller.banks = data;
+			controller.banks = data.list;
 		});
 		
 		controller.save = function(){
 			$http.post('save', controller.bankAccount).success(function(data){
-				controller.accounts.list.push(controller.bankAccount);
+				controller.accounts.push(controller.bankAccount);
 				controller.bankAccount={};
 			});
 		}
 
 		controller.listAccounts = function() {
 			$http.get('list').success(function(data) {
-				controller.accounts = data;
+				controller.accounts = data.list;
 			});
 		}
 
