@@ -26,8 +26,10 @@ public class CategoryController {
 	}
 	
 	@Transactional
+	@Consumes("application/json")
 	public void save(Category category){
-		dao.save(category);
+		dao.save(category);		
+		result.use(Results.json()).from(category.getId()).serialize();
 	}
 	
 	public void list(){

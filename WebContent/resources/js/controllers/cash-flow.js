@@ -61,11 +61,7 @@
 				controller.map[movement.category.description] = controller.map[movement.category.description]+ movement.value;
 			}else{
 				controller.map[movement.category.description] = movement.value;
-			}
-			for (var i in controller.map) {
-			    console.log(i);
-			}
-			console.log(controller.map);			
+			}		
 		}
 	} ]);
 })();

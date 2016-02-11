@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html ng-app="module-category">
 <head>
-<script src="../resources/js/angular/angular.min.js"></script>
-<script src="../resources/js/angular/category.js"></script>
+<script src="../resources/js/lib/angular.min.js"></script>
+<script src="../resources/js/controllers/category.js"></script>
 <meta charset="ISO-8859-1">
 <title>Category</title>
 </head>
 <body>
-	<form method="post" action="save" name="frmCategory"
+	<form method="post" name="frmCategory"
 		ng-controller="CategoryController as categoryCtrl" novalidate>
 		<fieldset>
 			<legend>Category</legend>
 			<label for="category.description">Category *</label> 
-			<input ng-model="category" type="text" name="category.description" id="category.description" required/> 
-				<button type="submit" ng-disabled="frmCategory.$invalid">save</button>
+			<input ng-model="category.description" type="text" name="category.description" id="category.description" required/> 
+				<button ng-click="categoryCtrl.save(category)" ng-disabled="frmCategory.$invalid">save</button>
 		</fieldset>
 
 		<fieldset>
@@ -22,7 +22,7 @@
 				<tr>
 					<td>Description</td>
 				</tr>
-				<tr ng-repeat="category in categoryCtrl.categories.list">
+				<tr ng-repeat="category in categories">
 					<td>{{category.description}}</td>					
 					<td><input type="button" ng-click="categoryCtrl.remove(category)"	value="remove"></td>
 				</tr>
