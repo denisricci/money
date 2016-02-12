@@ -29,7 +29,7 @@ public class BankAccountController implements Serializable{
 	@Consumes("application/json")
 	public void save(BankAccount bankAccount){
 		dao.save(bankAccount);
-		result.use(Results.http()).setStatusCode(200);
+		result.use(Results.json()).from(bankAccount.getId()).serialize();
 	}
 	
 	public void list(){

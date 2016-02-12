@@ -4,6 +4,7 @@
 		self = this;
 		$scope.categories = [];		
 		$scope.category={};
+		$scope.category.operation='DEBIT';
 
 		self.list = function() {
 			$http.get('list').success(function(data) {
@@ -22,6 +23,7 @@
 				category.id=data.integer;
 				$scope.categories.push(category);
 				$scope.category={};
+				$scope.category.operation='DEBIT';
 			});
 		}
 

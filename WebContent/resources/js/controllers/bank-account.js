@@ -1,34 +1,35 @@
 (function() {
 	var app = angular.module('module-bank-account', []);
-	app.controller('MoneyController', [ '$http', function($http) {
-		var controller = this;
-		controller.accounts = {};
-		controller.banks = {};
-		controller.bankAccount={};
+	app.controller('AccountController', function($http, $scope) {
+		var self = this;
+		$scope.accounts = {};
+		$scope.banks = {};
+		$scope.bankAccount={};
 
 		$http.get('bankList').success(function(data) {
-			controller.banks = data.list;
+			$scope.banks = data.list;
 		});
 		
-		controller.save = function(){
-			$http.post('save', controller.bankAccount).success(function(data){
-				controller.accounts.push(controller.bankAccount);
-				controller.bankAccount={};
+		self.save = function(bankAccount){
+			$http.post('save', bankAccount).success(function(data){
+				bankAccount.id=data.integer;
+				$scope.accounts.push(bankAccount);
+				$scope.bankAccount={};
 			});
 		}
 
-		controller.listAccounts = function() {
+		self.listAccounts = function() {
 			$http.get('list').success(function(data) {
-				controller.accounts = data.list;
+				$scope.accounts = data.list;
 			});
 		}
 
-		controller.remove = function(account) {
+		self.remove = function(account) {
 			$http.post('remove', account).success(function(data) {
-				controller.listAccounts();
+				self.listAccounts();
 			});
 		};
 
-		controller.listAccounts();
-	} ]);
+		self.listAccounts();
+	} );
 })();

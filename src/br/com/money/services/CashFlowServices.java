@@ -13,7 +13,7 @@ public class CashFlowServices {
 	private CashFlowDAO dao;
 	
 	@Transactional
-	public void bankPosting(Movement movement){
+	public void bankPosting(Movement movement){		
 		BankAccount bankAccount = dao.findById(movement.getIdBankAccount(), BankAccount.class);		
 		bankAccount.setBalance(movement.calculateBalance(bankAccount.getBalance()));
 		dao.save(movement);

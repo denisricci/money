@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import br.com.money.enums.Operation;
+
 @Entity
 public class Category extends EntityBase<Integer>{
 	
@@ -13,6 +15,8 @@ public class Category extends EntityBase<Integer>{
 	@GeneratedValue
 	private Integer id;
 	private String description;
+	
+	private Operation operation;
 	
 	public Integer getId() {
 		return id;
@@ -25,6 +29,12 @@ public class Category extends EntityBase<Integer>{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Operation getOperation() {
+		return operation;
+	}
+	public void setOperation(Operation operation) {
+		this.operation = operation;
 	}
 
 }

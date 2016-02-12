@@ -14,8 +14,7 @@
 		controller.bankAccount.id=getParameterByName('accountId', document.URL);		
 		
 		controller.loaDefaultValues=function(){
-			controller.movement.date=currentDate();
-			controller.movement.operation='DEBIT';
+			controller.movement.date=currentDate();			
 		}
 		
 		controller.getAccount=function(){
@@ -24,26 +23,27 @@
 			});
 		}
 		
+		controller.movementsList =function(){ 
+			$http.get('movementsList?accountId=' + controller.bankAccount.id).success(function(data) {
+			controller.movements = data.list;			
+			});
+		}
+		
 		controller.loaDefaultValues();
 		controller.getAccount();
+		controller.movementsList();
 		
 		$http.get('../category/list').success(function(data){
 			controller.categories=data.list;
 		});
 		
-		
-		
-		$http.get('movementsList?accountId=' + controller.bankAccount.id).success(function(data) {
-			controller.movements = data.list;
-		});
-
+								
 		controller.add = function() {
 			controller.movement.idBankAccount=controller.bankAccount.id;
-			if(controller.movement.operation==='DEBIT'){
-				controller.movement.value=parseFloat(controller.movement.value) * -1;
-			}
+			controller.movement.value=parseFloat(controller.movement.value);
+						
 			$http.post('add', controller.movement).success(function(data) {							
-				controller.movements.push(controller.movement);
+				controller.movementsList();
 				controller.movement={};
 				controller.loaDefaultValues();
 				controller.getAccount();

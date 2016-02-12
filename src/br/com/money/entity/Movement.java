@@ -42,8 +42,12 @@ public class Movement extends EntityBase<Integer>{
 		
 	private Date date;
 	
-	public BigDecimal calculateBalance(BigDecimal balance){
-		if(operation !=null && value !=null){
+	public BigDecimal calculateBalance(BigDecimal balance){						
+		if(getOperation() == Operation.DEBIT && value.compareTo(BigDecimal.ZERO) == 1){
+			this.value = this.value.multiply(new BigDecimal(-1));
+		}
+		
+		if(value !=null){						
 			this.currentBalance = balance.add(this.value);		
 			return this.currentBalance;
 		}		
@@ -99,6 +103,9 @@ public class Movement extends EntityBase<Integer>{
 	}
 
 	public Operation getOperation() {
+		if(operation == null){
+			operation = this.category.getOperation();
+		}	
 		return operation;
 	}
 
