@@ -19,11 +19,7 @@ public class CategoryController {
 	private Result result;
 	
 	@Inject
-	private GenericDAO dao;		
-	
-	public void forward(){
-		result.forwardTo("../WEB-INF/html/category.html");
-	}
+	private GenericDAO dao;
 	
 	@Transactional
 	@Consumes("application/json")

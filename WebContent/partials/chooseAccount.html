@@ -1,0 +1,19 @@
+<form method="get"  id="frmChoose" ng-init="initChooseAccount()">
+	<input type="hidden" id="accountId" name="accountId" />
+	<fieldset>
+		<legend>Choose one account</legend>
+		<table>
+			<tr>
+				<td>Agency</td>
+				<td>Number</td>
+				<td>Bank</td>
+			</tr>
+			<tr ng-repeat="account in accounts">
+				<td>{{account.agency}}</td>
+				<td>{{account.number}}</td>
+				<td>{{account.bank.name}}</td>
+				<td><a href="#/cashFlow/account/{{account.id}}">choose</a></td>
+			</tr>
+		</table>
+	</fieldset>
+</form>

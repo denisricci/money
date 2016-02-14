@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="money">
 <head>
-<meta charset="ISO-8859-1">
-<title>Money Project</title>
+    <meta charset="ISO-8859-1">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+    <script src="js/lib/jquery-2.2.0.min.js"></script>
+    <script src="js/lib/jquery.mask.min.js"></script>
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-route.min.js"></script>
+
+    <script src="js/functions.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/controllers/category.js"></script>
+    <script src="js/controllers/bank-account.js"></script>
+    <script src="js/controllers/cash-flow.js"></script>
+    <script src="js/controllers/choose-account.js"></script>
+
+    <script src="js/filters/monetary-filter.js"></script>
+
+    <title>Money</title>
 </head>
 <body>
-	<fieldset>
-		<legend>Menu</legend>
-		<table>
-			<tr>
-				<td><a href="cashFlow/chooseAccount">Cash Flow</a></td>
-			</tr>
-			<tr>
-				<td><a href="bankAccount/forward">Bank Account</a></td>
-			</tr>
-			<tr>
-				<td><a href="category/forward">Category</a></td>
-			</tr>
-		</table>
-	</fieldset>
+<div>
+    <ng-view></ng-view>
+</div>
 </body>
 </html>

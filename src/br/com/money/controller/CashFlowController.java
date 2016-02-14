@@ -26,10 +26,7 @@ public class CashFlowController {
 	
 	@Inject
 	private CashFlowServices cashFlowServices;
-	
-	public void forward(){
-		result.forwardTo("../WEB-INF/html/cashFlow.html");
-	}
+
 	
 	public void chooseAccount(){
 		result.forwardTo("../WEB-INF/html/chooseAccount.html");

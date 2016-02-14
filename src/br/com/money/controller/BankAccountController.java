@@ -2,9 +2,7 @@ package br.com.money.controller;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
@@ -47,9 +45,5 @@ public class BankAccountController implements Serializable{
 	public void remove(BankAccount bankAccount){
 		dao.remove(bankAccount.getId(), BankAccount.class);
 		result.use(Results.http()).setStatusCode(200);
-	}
-	
-	public void forward(){
-		result.forwardTo("../WEB-INF/html/bankAccount.html");
 	}
 }

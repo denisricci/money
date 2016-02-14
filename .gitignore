@@ -9,6 +9,11 @@
 */.settings/**
 *.settings*
 
+*/.idea/*
+*/.idea/**
+*.idea*
+money-project.iml
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

@@ -1,0 +1,44 @@
+
+<form method="post" name="frmCategory"  ng-init="initCategory()" novalidate>
+	<fieldset>
+		<legend>Category</legend>
+		<table>
+			<tr>
+				<td><label for="category.description">Category *</label></td>
+				<td><input ng-model="category.description" type="text"
+					name="category.description" id="category.description" required /></td>
+			</tr>
+			<tr>
+				<td><label for="value">Operation</label></td>
+				<td><select ng-model="category.operation">
+						<option value="DEBIT">Debit</option>
+						<option value="CREDIT">Credit</option>
+				</select></td>
+			</tr>
+		</table>
+
+		<button ng-click="save(category)"
+			ng-disabled="frmCategory.$invalid">save</button>
+
+
+	</fieldset>
+
+	<fieldset>
+		<legend>Existing categories</legend>
+		<table id="records_table">
+			<tr>
+				<td>Description</td>
+				<td>Operation</td>
+			</tr>
+			<tr ng-repeat="category in categories">
+				<td>{{category.description}}</td>
+				<td>{{category.operation}}</td>
+				<td><input type="button"
+					ng-click="remove(category)" value="remove"></td>
+			</tr>
+		</table>
+	</fieldset>
+	<p>
+		&nbsp<a href="#/menu">go to home</a>
+	</p>
+</form>

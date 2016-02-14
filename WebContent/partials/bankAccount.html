@@ -1,0 +1,77 @@
+<form name="frmBankAccount" method="POST" novalidate ng-init="initBankAccount()">
+	<fieldset>
+		<legend>New Bank Account</legend>
+		<table>
+			<tr>
+				<td><label for="bankAccount.agency">Agency*</label></td>
+				<td><input name="bankAccount.agency" class="agency"
+					ng-model="bankAccount.agency" id="bankAccount.agency" type="text"
+					required /></td>
+			</tr>
+			<tr>
+				<td><label for="bankAccount.number">Number*</label></td>
+				<td><input name="bankAccount.number" class="accountNumber"
+					ng-model="bankAccount.number" id="bankAccount.number" type="text"
+					required /></td>
+			</tr>
+			<tr>
+				<td><label for="bankAccount.balance">Opening Balance*</label></td>
+				<td><input name="bankAccount.balance"
+					ng-model="bankAccount.balance" class="money"
+					id="bankAccount.balance" type="text" required /></td>
+			</tr>
+			<tr>
+				<td><label for="banks">Bank*</label></td>
+				<td><select id="banks" name="bankAccount.bank.id"
+					ng-model="bankAccount.bank"
+					ng-options="bank as bank.name for bank in banks track by bank.id"
+					required>
+						<option value="">select one ..</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="button" ng-disabled="frmBankAccount.$invalid"
+					ng-click="save(bankAccount)" value="save" /></td>
+				<td>
+					<div ng-hide="frmBankAccount.$valid">
+						<font color="red">* required fields</font>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+	</fieldset>
+	<fieldset>
+		<legend>Existing bank accounts</legend>
+		<table id="records_table">
+			<tr>
+				<td>Agency</td>
+				<td>Number</td>
+				<td>Balance</td>
+				<td>Bank</td>
+			</tr>
+			<tr ng-repeat="account in accounts">
+				<td>{{account.agency}}</td>
+				<td>{{account.number}}</td>
+				<td>{{account.balance}}</td>
+				<td>{{account.bank.name}}</td>
+				<td><input type="button" ng-click="remove(account)"
+					value="remove"></td>
+			</tr>
+		</table>
+	</fieldset>
+
+	<p>
+		&nbsp<a href="#/menu">go to home</a>
+	</p>
+</form>
+
+<script>
+	$('.money').mask('000.000.000.000.000,00', {
+		reverse : true
+	});
+
+	$('.agency').mask('0000');
+
+	$('.accountNumber').mask('000000000');
+</script>
