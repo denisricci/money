@@ -1,0 +1,30 @@
+<form novalidate>
+    <fieldset>
+        <legend>New Credit Card</legend>
+        <table>
+            <tr>
+                <td>
+                    <label for="accounts"/>For accout </label></td>
+                <td>
+                    <select id="accounts" ng-model="creditCard.bankAccount"
+                            ng-options="account as account.number for account in accounts track by account.id">
+                    </select></td>
+            </tr>
+            <tr>
+                <td><label for="description">Description</label></td>
+                <td><input type="text" id="description" ng-model="creditCard.description"/></td>
+            </tr>
+            <tr>
+                <td><label for="invoice">Invoice date</label></td>
+                <td><input type="text" id="invoice"  ng-model="creditCard.invoiceDate"/></td>
+            </tr>
+            <tr>
+                <td><label for="companies">Company</label></td>
+                <td><select id="companies" ng-model="creditCard.company"
+                    ng-options="company as company.name for company in companies track by bank.id">
+                    <option value="1">select one ...</option>
+                </select></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
