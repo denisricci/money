@@ -11,7 +11,12 @@ import javax.persistence.Table;
 @Table(name = "credit_card_company")
 public class CreditCardCompany extends EntityBase<Integer>{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     private Integer id;
 
     private String name;
@@ -25,4 +30,12 @@ public class CreditCardCompany extends EntityBase<Integer>{
     public void setId(Integer id) {
         this.id=id;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

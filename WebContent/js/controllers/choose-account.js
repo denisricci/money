@@ -2,7 +2,7 @@ angular.module('money').controller('ChooseAccountController', function($http,$sc
 	$scope.accounts = [];
 
 	$scope.initChooseAccount = function(){
-		$http.get('../bankAccount/list').success(function(data) {
+		$http.get('bankAccount/list').success(function(data) {
 			$scope.accounts = data.list;
 		});
 	}
