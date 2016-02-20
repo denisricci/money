@@ -56,7 +56,19 @@ public class GenericDAO {
 	public <E> List<E> findAll(Class<E> classe) {
 		TypedQuery<E> query = getEntityManager().createQuery("from " + classe.getSimpleName() + " where excluido = 0", classe);		
 		return query.getResultList();
-	}		
+	}
+
+	public <E> List<E> findAll(Class<E> classe, String ... fetchColuns) {
+		StringBuilder sql = new StringBuilder("from " + classe.getSimpleName() + " e ");
+		for(String colum : fetchColuns){
+			sql.append(" join fetch e.");
+			sql.append(colum);
+		}
+		sql.append(" where e.excluido = 0") ;
+
+		TypedQuery<E> query = getEntityManager().createQuery(sql.toString(), classe);
+		return query.getResultList();
+	}
 	
 	public EntityManager getEntityManager() {
 		return this.entityManager;

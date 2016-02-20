@@ -26,7 +26,7 @@ angular.module('money', ['ngRoute']).config(function ($routeProvider) {
 
     $routeProvider.when('/creditCard', {
         templateUrl: 'partials/creditCard.html',
-        controller: 'ChooseAccountController'
+        controller: 'CreditCardController'
     });
 
     $routeProvider.otherwise({redirectTo:'/menu'});

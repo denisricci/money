@@ -21,14 +21,20 @@ angular.module('money').controller('CreditCardController',function($scope, $http
         		$scope.accounts = data.list;
         	});
         }  
-    	
+    	$scope.listAccounts();
     	$scope.list();
     }
     
     $scope.save = function (){
-    	$http.post('creditCard/save', $scope.creditCard).succes(function(data){
-    		
+    	$http.post('creditCard/save', $scope.creditCard).success(function(data){
+    		$scope.list();
     	});
-    }        
-    
+    }
+
+	$scope.remove = function (creditCardId){
+		$http.post('creditCard/remove', creditCardId).success(function(data){
+			$scope.list();
+		});
+	}
+
 });
