@@ -49,25 +49,16 @@
                 </tr>
             </table>
         </div>
-        <div style="float: left; padding-left: 20px">
-            <table>
-                <tr>
-                    <td>Current Balance</td>
-                    <td>{{bankAccount.balance | reais}}</td>
-                </tr>
-                <tr>
-                    <td>Positive</td>
-                    <td>{{values.positive | reais}}</td>
-                </tr>
-                <tr>
-                    <td>Negative</td>
-                    <td>{{values.negative | reais}}</td>
-                </tr>
-            </table>
-        </div>
     </fieldset>
     <fieldset>
         <legend>Cash Flow</legend>
+        <div style="float: top; padding-bottom: 20px;">
+        <label for="de">De</label>
+        <input type="text" class="date" id="de" ng-model="filter.start"/>
+        <label for="a">a</label>
+        <input type="text" class="date" id="a" ng-model="filter.end"/>
+        <input type="button" value="show" ng-click="movementsList()"/>
+        </div>
         <div style="float: left;">
             <table>
                 <tr>
@@ -87,6 +78,27 @@
                 </tr>
             </table>
         </div>
+
+        <div style="float: left; padding-left: 20px">
+            <fieldset>
+                <legend>Balance</legend>
+                <table>
+                    <tr>
+                        <td>Current</td>
+                        <td>{{bankAccount.balance | reais}}</td>
+                    </tr>
+                    <tr>
+                        <td>Positive</td>
+                        <td>{{values.positive | reais}}</td>
+                    </tr>
+                    <tr>
+                        <td>Negative</td>
+                        <td>{{values.negative | reais}}</td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+
         <div style="float: left; padding-left: 50px">
             <fieldset>
                 <legend>By Category</legend>
@@ -102,6 +114,7 @@
                 </table>
             </fieldset>
         </div>
+
     </fieldset>
     <p>
         &nbsp<a href="#/menu">go to home</a>

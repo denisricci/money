@@ -7,9 +7,12 @@ angular.module('money').controller('CashFlowController', function ($http, $route
     $scope.values.positive = 0;
     $scope.values.negative = 0;
     $scope.map = {};
+    $scope.filter = {};
 
     $scope.loaDefaultValues = function () {
         $scope.movement.date = currentDate();
+        $scope.filter.start = firstDateOfMonth();
+        $scope.filter.end = lastDateOfMonth();
     }
 
     $scope.getAccount = function () {
@@ -22,9 +25,14 @@ angular.module('money').controller('CashFlowController', function ($http, $route
     }
 
     $scope.movementsList = function () {
-        $http.get(
-            'cashFlow/movementsList?accountId='
-            + $scope.bankAccount.id).success(
+        $scope.values = {};
+        $scope.values.positive = 0;
+        $scope.values.negative = 0;
+        $scope.map = {};
+        var url = 'cashFlow/movementsList?accountId=' + $scope.bankAccount.id +
+            '&startDt=' + $scope.filter.start +
+            '&endDt=' + $scope.filter.end;
+        $http.get(url).success(
             function (data) {
                 $scope.movements = data.list;
             });
@@ -61,7 +69,7 @@ angular.module('money').controller('CashFlowController', function ($http, $route
     }
 
 
-    $scope.initCashFlow=function(){
+    $scope.initCashFlow = function () {
         $scope.bankAccount.id = $routeParams.accountId;
 
         $scope.loaDefaultValues();

@@ -2,7 +2,7 @@ angular.module('money').controller('CreditCardController',function($scope, $http
     $scope.creditCard={};
     $scope.creditCards=[];
     $scope.companies=[];
-    $scope.accounts=[];        
+    $scope.accounts=[];
     
     
     $scope.list = function(){

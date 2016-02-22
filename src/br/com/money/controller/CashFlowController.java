@@ -1,9 +1,5 @@
 package br.com.money.controller;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
@@ -14,6 +10,11 @@ import br.com.money.entity.BankAccount;
 import br.com.money.entity.Category;
 import br.com.money.entity.Movement;
 import br.com.money.services.CashFlowServices;
+import javax.inject.Inject;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class CashFlowController {
@@ -37,8 +38,17 @@ public class CashFlowController {
 		result.use(Results.json()).from(categories).serialize();
 	}
 	
-	public void movementsList(Integer accountId){
-		List<Movement> movements = dao.findMovimentsByAccountId(accountId);
+	public void movementsList(Integer accountId, String startDt, String endDt){
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date start = null;
+		Date end = null;
+		try {
+			start = new Date(format.parse(startDt).getTime());
+			end = new Date(format.parse(endDt).getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<Movement> movements = dao.findMovimentsByAccountId(accountId, start, end);
 		result.use(Results.json()).from(movements).include("category").serialize();
 	}
 	
