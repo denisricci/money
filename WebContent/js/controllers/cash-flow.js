@@ -35,6 +35,7 @@ angular.module('money').controller('CashFlowController', function ($http, $route
         $http.get(url).success(
             function (data) {
                 $scope.movements = data.list;
+                $scope.values.balance = $scope.movements[$scope.movements.length-1].currentBalance;
             });
     }
 
