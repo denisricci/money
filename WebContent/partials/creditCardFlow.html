@@ -1,0 +1,122 @@
+<form name="frmMovement" novalidate ng-init="initCashFlow()">
+    <fieldset>
+        <legend>Movement</legend>
+        <label style="float: right;">{{creditCard.description}}
+            {{creditCard.invoiceDay}}
+            </label>
+        <div style="float: left; padding-right: 20px; ">
+            <table>
+                <tr>
+                    <td><label for="value">Value*</label></td>
+                    <td><input name="movement.value" id="value" type="text"
+                               class="money" ng-model="movement.value" required/></td>
+                </tr>
+                <tr>
+                    <td><label for="category">Category*</label></td>
+                    <td><select id="category" name="movement.category.id"
+                                ng-model="movement.category"
+                                ng-options="category as category.description for category in categories track by category.id"
+                                required>
+                        <option value="">select one ..</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><label for="date">Date*</label></td>
+                    <td><input name="movement.date" id="date" class="date"
+                               ng-model="movement.date" type="text" required/></td>
+                </tr>
+                <tr>
+                    <td><label for="value">Description</label></td>
+                    <td><input name="movement.description" id="description"
+                               ng-model="movement.description" type="text"/></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="add"
+                               ng-click="add()" ng-disabled="frmMovement.$invalid"/></td>
+                    <td>
+                        <div ng-hide="frmMovement.$valid">
+                            <font color="red">* required fields</font>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Credit Card Flow</legend>
+        <div style="float: top; padding-bottom: 20px;">
+            <label for="de">De</label>
+            <input type="text" class="date" id="de" ng-model="filter.start"/>
+            <label for="a">a</label>
+            <input type="text" class="date" id="a" ng-model="filter.end"/>
+            <input type="button" value="show" ng-click="movementsList()"/>
+        </div>
+        <div style="float: left;">
+            <table>
+                <tr>
+                    <td>Value</td>
+                    <td>Date</td>
+                    <td>Category</td>
+                </tr>
+                <tr ng-repeat="movement in movements"
+                    ng-init="consolidate(movement);">
+                    <td ng-class="{positive: movement.value > 0	}">{{movement.value
+                        | reais}}
+                    </td>
+                    <td ng-class="{positive: movement.value > 0}">{{movement.date
+                        | date:'dd/MM/yyyy'}}
+                    </td>
+                    <td ng-class="{positive: movement.value > 0	}">{{movement.category.description}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="float: left; padding-left: 20px">
+            <fieldset>
+                <legend>Balance</legend>
+                <table>
+                    <tr>
+                        <td>Current</td>
+                        <td>{{values.balance | reais}}</td>
+                    </tr>
+                    <tr>
+                        <td>Positive</td>
+                        <td>{{values.positive | reais}}</td>
+                    </tr>
+                    <tr>
+                        <td>Negative</td>
+                        <td>{{values.negative | reais}}</td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+
+        <div style="float: left; padding-left: 50px">
+            <fieldset>
+                <legend>By Category</legend>
+                <table>
+                    <tr>
+                        <td>Category</td>
+                        <td>Value</td>
+                    </tr>
+                    <tr ng-repeat="(key, value) in map">
+                        <td>{{key}}</td>
+                        <td>{{value | reais}}</td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+
+    </fieldset>
+    <p>
+        &nbsp<a href="#/menu">go to home</a>
+    </p>
+</form>
+
+<script>
+    $('.money').mask('000.000.000.000.000,00', {
+        reverse: true
+    });
+
+    $('.date').mask('00/00/0000');
+</script>
